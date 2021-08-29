@@ -10,12 +10,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Chator.Core.Services
 {
+    /// <summary>
+    /// The User Service to handle all User actions.
+    /// </summary>
     public class UserService : IUserService
     {
-        private UserManager<User, long> _userManager;
+        private UserManager<User> _userManager;
 
         private IMapper _mapper;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserService"/> class.
+        /// </summary>
+        /// <param name="userManager">The user manager to get the information from.</param>
+        /// <param name="mapper">The AutoMapper to use for passing through ViewModels.</param>
         public UserService(
             UserManager<User> userManager,
             IMapper mapper)
@@ -24,6 +32,7 @@ namespace Chator.Core.Services
             _mapper = mapper;
         }
 
+        /// <inheritdoc/>
         public async Task<UserViewModel> CreateUserAsync(CreateUserViewModel viewModel)
         {
             var checkUsernameDiscrim = await _userManager.Users.FirstOrDefaultAsync(user => user.UserName == viewModel.Username && user.Discriminator == 0001);
@@ -47,11 +56,6 @@ namespace Chator.Core.Services
             }
 
             return _mapper.Map<UserViewModel>(await _userManager.FindByEmailAsync(viewModel.Email));
-        }
-
-        public Task<UserViewModel> GetByIdAsync(long id)
-        {
-            var user = await _userManager.FindByIdAsync(id);
         }
     }
 }

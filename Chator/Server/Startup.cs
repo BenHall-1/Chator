@@ -1,37 +1,49 @@
+﻿using System;
+using System.IO;
+using System.Reflection;
 using AutoMapper;
+using AutoMapper.EquivalencyExpression;
 using Chator.Core;
+using Chator.Core.Services;
+using Chator.Core.Services.Interfaces;
 using Chator.Shared.Models;
+using Chator.Shared.Utils;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using AutoMapper.EquivalencyExpression;
-using Chator.Shared.Utils;
 using Microsoft.OpenApi.Models;
-using Chator.Core.Services;
-using Chator.Core.Services.Interfaces;
-using Microsoft.AspNetCore.Routing;
-using System;
-using System.Reflection;
-using System.IO;
-using Microsoft.AspNetCore.Identity;
 
 namespace Chator.Server
 {
+    /// <summary>
+    /// Startup file.
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Startup"/> class.
+        /// </summary>
+        /// <param name="configuration">The configuration to launch the system with.</param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// Gets the configuration for the system.
+        /// </summary>
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        /// <summary>
+        /// Configures the services.
+        /// </summary>
+        /// <param name="services">The service collection to be configured.</param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -44,7 +56,7 @@ namespace Chator.Server
 
             services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole<long>>()
-                .AddEntityFrameworkStores<ApplicationDbContext, long>();
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddIdentityServer()
                 .AddApiAuthorization<User, ApplicationDbContext>();
@@ -74,7 +86,11 @@ namespace Chator.Server
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Configures the application.
+        /// </summary>
+        /// <param name="app">The app to configure.</param>
+        /// <param name="env">The environment to use when configuring.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

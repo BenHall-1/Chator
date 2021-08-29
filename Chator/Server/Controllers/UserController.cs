@@ -10,10 +10,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Chator.Server.Controllers
 {
+    /// <summary>
+    /// The controller for the <see cref="User"/>s.
+    /// </summary>
     public class UserController : BaseController
     {
         private IUserService _userService;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserController"/> class.
+        /// </summary>
+        /// <param name="userService">The UserService.</param>
         public UserController(IUserService userService)
         {
             _userService = userService;
@@ -37,7 +44,10 @@ namespace Chator.Server.Controllers
         /// <param name="id">The ID of the User to pull data for.</param>
         /// <returns><see cref="UserViewModel"/> for ths given user ID.</returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetAsync([FromRoute] long id) { return new AcceptedResult(); }
+        public async Task<ActionResult> GetAsync([FromRoute] long id)
+        {
+            return new AcceptedResult();
+        }
 
         /// <summary>
         /// Modify the requester's user account settings.
@@ -45,7 +55,10 @@ namespace Chator.Server.Controllers
         /// <param name="createUserViewModel">The details to update.</param>
         /// <returns>An updated <see cref="UserViewModel"/>.</returns>
         [HttpPut("@me")]
-        public async Task<ActionResult> GetAsync([FromBody] CreateUserViewModel createUserViewModel) { return new AcceptedResult(); }
+        public async Task<ActionResult> GetAsync([FromBody] CreateUserViewModel createUserViewModel)
+        {
+            return new AcceptedResult();
+        }
 
         /// <summary>
         /// Returns a list of servers with minimal information.
@@ -63,7 +76,10 @@ namespace Chator.Server.Controllers
         /// <param name="id">The snowflake of the server to leave.</param>
         /// <returns>204 if successful.</returns>
         [HttpDelete("@me/guilds/{id}")]
-        public async Task<ActionResult> LeaveGuildAsync([FromRoute] long id) { return new AcceptedResult(); }
+        public async Task<ActionResult> LeaveGuildAsync([FromRoute] long id)
+        {
+            return new AcceptedResult();
+        }
 
         /// <summary>
         /// Creates a user with the given information.

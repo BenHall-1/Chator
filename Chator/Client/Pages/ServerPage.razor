@@ -1,9 +1,9 @@
-﻿@page "/servers/{serverid}/{channelid?}"
+﻿@page "/servers/{Serverid}/{Channelid?}"
 @inherits ServerPageBase
 
 <div class="channelmenu">
-    <CascadingValue Value="@serverid">
-        <CascadingValue Value="@channelid">
+    <CascadingValue Value="@Serverid">
+        <CascadingValue Value="@Channelid">
             <ChannelMenu />
         </CascadingValue>
     </CascadingValue>
