@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Chator.Server</name>
+    </assembly>
+    <members>
+        <member name="M:Chator.Server.Controllers.UserController.GetAsync">
+            <summary>
+            Returns the <see cref="T:Chator.Shared.ViewModels.User.UserViewModel"/> object for the requester's account.
+            </summary>
+            <returns><see cref="T:Chator.Shared.ViewModels.User.UserViewModel"/> for the requester.</returns>
+        </member>
+        <member name="M:Chator.Server.Controllers.UserController.GetAsync(System.Int64)">
+            <summary>
+            Returns the <see cref="T:Chator.Shared.ViewModels.User.UserViewModel"/> for a given user ID.
+            </summary>
+            <param name="id">The ID of the User to pull data for.</param>
+            <returns><see cref="T:Chator.Shared.ViewModels.User.UserViewModel"/> for ths given user ID.</returns>
+        </member>
+        <member name="M:Chator.Server.Controllers.UserController.GetAsync(Chator.Shared.ViewModels.User.CreateUserViewModel)">
+            <summary>
+            Modify the requester's user account settings.
+            </summary>
+            <param name="createUserViewModel">The details to update.</param>
+            <returns>An updated <see cref="T:Chator.Shared.ViewModels.User.UserViewModel"/>.</returns>
+        </member>
+        <member name="M:Chator.Server.Controllers.UserController.GetGuildsAsync">
+            <summary>
+            Returns a list of servers with minimal information.
+            </summary>
+            <returns>A list of <see cref="!:ServerViewModel"/>s depending for the requester.</returns>
+        </member>
+        <member name="M:Chator.Server.Controllers.UserController.LeaveGuildAsync(System.Int64)">
+            <summary>
+            Leaves a server. Will return 204 on success.
+            </summary>
+            <param name="id">The snowflake of the server to leave.</param>
+            <returns>204 if successful.</returns>
+        </member>
+        <member name="M:Chator.Server.Controllers.UserController.CreateAsync(Chator.Shared.ViewModels.User.CreateUserViewModel)">
+            <summary>
+            Creates a user with the given information.
+            </summary>
+            <param name="createUserViewModel">The information to create the user based on.</param>
+            <returns><see cref="T:Chator.Shared.ViewModels.User.UserViewModel"/> with the newly created user's information.</returns>
+        </member>
+    </members>
+</doc>
